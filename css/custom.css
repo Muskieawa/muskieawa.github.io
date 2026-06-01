@@ -1,8 +1,11 @@
 body {
-    background-color: rgba(217, 236, 255, 0.5) !important; 
+    background-color: rgba(217, 236, 255, 0.5) !important;
 }
 
-#content-inner .recent-post-item,
-#aside-content .card-widget {
-    background-color: rgba(255, 255, 255, 0.8) !important; 
+/* 增强选择器的权重，精准定位 Butterfly 的卡片背景 */
+#page-header + #content-inner .recent-post-item,
+#aside-content .card-widget,
+#content-inner .layout {
+    background: rgba(255, 255, 255, 0.7) !important; /* 调整为 0.7 透明度，更明显一点 */
+    background-color: rgba(255, 255, 255, 0.7) !important;
 }
