@@ -1,3 +1,7 @@
 body {
-    background-color: #d9ecff !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+#content-inner .recent-post-item, 
+#aside-content .card-widget {
+    background: rgba(255, 255, 255, 0.8) !important;
 }
