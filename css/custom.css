@@ -1,11 +1,21 @@
+/* 1. 全局页面背景：淡淡的蓝色 */
 body {
     background-color: rgba(217, 236, 255, 0.5) !important;
 }
 
-/* 增强选择器的权重，精准定位 Butterfly 的卡片背景 */
-#page-header + #content-inner .recent-post-item,
-#aside-content .card-widget,
-#content-inner .layout {
-    background: rgba(255, 255, 255, 0.7) !important; /* 调整为 0.7 透明度，更明显一点 */
-    background-color: rgba(255, 255, 255, 0.7) !important;
+/* 2. 精准破坏并重构卡片背景：包含主页文章列表卡片、侧边栏卡片以及独立文章/页面卡片 */
+#recent-posts > .recent-post-item,
+#aside-content > .card-widget,
+#post,
+#page,
+#archive,
+#tag,
+#category,
+.layout {
+    background: rgba(255, 255, 255, 0.7) !important; /* 0.7代表70%不透明度的白，也就是30%透明 */
+}
+
+/* 3. 顺便干掉可能存在的底层默认白底颜色变量 */
+:root {
+    --light_bg: rgba(255, 255, 255, 0.7) !important;
 }
