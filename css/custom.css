@@ -1,21 +1,35 @@
-/* 1. 全局页面背景：淡淡的蓝色 */
+/* ==========================================================
+   1. 基础背景层重构：让大容器全部变透明，防止它们用纯色挡住底部的芙宁娜
+   ========================================================== */
 body {
     background-color: rgba(217, 236, 255, 0.5) !important;
 }
 
-/* 2. 精准破坏并重构卡片背景：包含主页文章列表卡片、侧边栏卡片以及独立文章/页面卡片 */
-#recent-posts > .recent-post-item,
-#aside-content > .card-widget,
-#post,
-#page,
-#archive,
-#tag,
-#category,
-.layout {
-    background: rgba(255, 255, 255, 0.7) !important; /* 0.7代表70%不透明度的白，也就是30%透明 */
+#body-wrap,
+#content-inner,
+#content-inner .layout {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
-/* 3. 顺便干掉可能存在的底层默认白底颜色变量 */
+/* ==========================================================
+   2. 精准卡片透明化：剥离所有文章、侧边栏和页面卡片的默认白色底色
+   ========================================================== */
+#recent-posts > .recent-post-item,
+#aside-content .card-widget,
+.layout_post > #post,
+.layout_page > #page,
+.layout_tags > #tags,
+.layout_categories > #categories,
+.layout_archives > #archives {
+    background: rgba(255, 255, 255, 0.7) !important;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ==========================================================
+   3. 主题底层全局变量重写：强制阻断自带的白底或深底色变量
+   ========================================================== */
 :root {
     --light_bg: rgba(255, 255, 255, 0.7) !important;
+    --global-bg: transparent !important;
 }
