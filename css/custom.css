@@ -1,19 +1,25 @@
 /* ==========================================================
-   1. 基础背景层重构：让大容器全部变透明，防止它们用纯色挡住底部的芙宁娜
+   1. 全局基础样式与极简配色 (Minimalist Theme Palette)
    ========================================================== */
-body {
-    background-color: rgba(217, 236, 255, 0.5) !important;
+:root {
+    --global-bg: #f8fafc;
+    --font-color: #1e293b;
+    --text-muted: #64748b;
+    --primary-color: #3b82f6;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --card-radius: 12px;
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
-#body-wrap,
-#content-inner,
-#content-inner .layout {
-    background: transparent !important;
-    background-color: transparent !important;
+body {
+    background-color: var(--global-bg) !important;
+    color: var(--font-color) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
 }
 
 /* ==========================================================
-   2. 精准卡片透明化：剥离所有文章、侧边栏和页面卡片的默认白色底色
+   2. 极简卡片设计：现代边框与微阴影
    ========================================================== */
 #recent-posts > .recent-post-item,
 #aside-content .card-widget,
@@ -22,14 +28,39 @@ body {
 .layout_tags > #tags,
 .layout_categories > #categories,
 .layout_archives > #archives {
-    background: rgba(255, 255, 255, 0.7) !important;
-    background-color: rgba(255, 255, 255, 0.7) !important;
+    background: var(--card-bg) !important;
+    border-radius: var(--card-radius) !important;
+    border: 1px solid var(--card-border) !important;
+    box-shadow: var(--card-shadow) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#recent-posts > .recent-post-item:hover,
+#aside-content .card-widget:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07) !important;
+    transform: translateY(-2px) !important;
 }
 
 /* ==========================================================
-   3. 主题底层全局变量重写：强制阻断自带的白底或深底色变量
+   3. 顶部导航与页脚极简化
    ========================================================== */
-:root {
-    --light_bg: rgba(255, 255, 255, 0.7) !important;
-    --global-bg: transparent !important;
+#nav {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid var(--card-border) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+}
+
+#nav a {
+    color: var(--font-color) !important;
+}
+
+#nav a:hover {
+    color: var(--primary-color) !important;
+}
+
+#footer {
+    background: transparent !important;
+    border-top: 1px solid var(--card-border) !important;
+    color: var(--text-muted) !important;
 }
