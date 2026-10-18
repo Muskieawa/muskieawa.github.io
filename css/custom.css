@@ -1,66 +1,249 @@
 /* ==========================================================
-   1. 全局基础样式与极简配色 (Minimalist Theme Palette)
+   极简博客主题样式 (Aligned with simple_blog.html Prototype)
    ========================================================== */
+
+/* 1. 全局设计变量 */
 :root {
-    --global-bg: #f8fafc;
-    --font-color: #1e293b;
-    --text-muted: #64748b;
-    --primary-color: #3b82f6;
+    --bg-color: #f7f9fc;
     --card-bg: #ffffff;
-    --card-border: #e2e8f0;
-    --card-radius: 12px;
-    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --primary: #4a90e2;
+    --primary-hover: #357abd;
+    --border-color: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+    /* 覆盖 Butterfly 内部变量 */
+    --global-bg: #f7f9fc !important;
+    --font-color: #2d3748 !important;
+    --theme-color: #4a90e2 !important;
+    --btn-bg: #4a90e2 !important;
+    --btn-hover-color: #357abd !important;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--global-bg) !important;
-    color: var(--font-color) !important;
+    background-color: var(--bg-color) !important;
+    color: var(--text-main) !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    line-height: 1.7 !important;
 }
 
-/* ==========================================================
-   2. 极简卡片设计：现代边框与微阴影
-   ========================================================== */
-#recent-posts > .recent-post-item,
-#aside-content .card-widget,
+/* 2. 居中单栏主容器 (860px 最大宽度) */
+#body-wrap {
+    background: transparent !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#content-inner,
+.layout {
+    max-width: 860px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 40px 16px !important;
+    background: transparent !important;
+    flex: 1;
+}
+
+/* 隐藏侧边栏，实现纯净单栏 */
+#aside-content {
+    display: none !important;
+}
+
+#recent-posts,
+.layout_post > #post,
+.layout_page > #page,
+.layout_tags > #tags,
+.layout_categories > #categories,
+.layout_archives > #archives {
+    width: 100% !important;
+    max-width: 860px !important;
+    margin: 0 auto !important;
+}
+
+/* 3. 彻底隐藏顶部导航栏与页眉 */
+#page-header,
+#nav {
+    display: none !important;
+}
+
+/* 4. 首页文章卡片 (严格对齐 simple_blog) */
+#recent-posts > .recent-post-item {
+    background-color: var(--card-bg) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 24px 28px !important;
+    margin-bottom: 24px !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#recent-posts > .recent-post-item:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 隐藏封面图，保持纯粹 */
+#recent-posts > .recent-post-item .post_cover {
+    display: none !important;
+}
+
+#recent-posts > .recent-post-item > .recent-post-info {
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+/* 标题 */
+.recent-post-info .article-title {
+    font-size: 1.35rem !important;
+    font-weight: 600 !important;
+    margin: 8px 0 10px !important;
+    line-height: 1.4 !important;
+}
+
+.recent-post-info .article-title a {
+    color: var(--text-main) !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+}
+
+.recent-post-info .article-title a:hover {
+    color: var(--primary) !important;
+}
+
+/* 元数据（日期、分类与标签） */
+.recent-post-info .article-meta-wrap {
+    font-size: 0.85rem !important;
+    color: var(--text-muted) !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.recent-post-info .article-meta-wrap a {
+    color: var(--text-muted) !important;
+}
+
+/* 胶囊标签样式 */
+.recent-post-info .article-meta-wrap .article-meta__tags {
+    background-color: #edf2f7 !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+    color: #4a5568 !important;
+    font-size: 0.82rem !important;
+    text-decoration: none !important;
+}
+
+/* 文章摘要 */
+.recent-post-info .content {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    margin-top: 6px !important;
+}
+
+/* 5. 文章详情页 (#post) 与独立页面 */
 .layout_post > #post,
 .layout_page > #page,
 .layout_tags > #tags,
 .layout_categories > #categories,
 .layout_archives > #archives {
     background: var(--card-bg) !important;
-    border-radius: var(--card-radius) !important;
-    border: 1px solid var(--card-border) !important;
-    box-shadow: var(--card-shadow) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 36px 32px !important;
 }
 
-#recent-posts > .recent-post-item:hover,
-#aside-content .card-widget:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07) !important;
-    transform: translateY(-2px) !important;
+#post-info .post-title {
+    font-size: 1.85rem !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+    margin-bottom: 12px !important;
 }
 
-/* ==========================================================
-   3. 顶部导航与页脚极简化
-   ========================================================== */
-#nav {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(8px) !important;
-    border-bottom: 1px solid var(--card-border) !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+#post-info #post-meta {
+    color: var(--text-muted) !important;
+    font-size: 0.88rem !important;
 }
 
-#nav a {
-    color: var(--font-color) !important;
+#article-container {
+    color: var(--text-main) !important;
+    font-size: 1rem !important;
+    line-height: 1.85 !important;
 }
 
-#nav a:hover {
-    color: var(--primary-color) !important;
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4 {
+    color: var(--text-main) !important;
+    font-weight: 600 !important;
+    margin-top: 1.8em !important;
+    margin-bottom: 0.8em !important;
 }
 
+#article-container h2 {
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-bottom: 6px !important;
+}
+
+#article-container blockquote {
+    background: #f8fafc !important;
+    border-left: 4px solid var(--primary) !important;
+    border-radius: 0 6px 6px 0 !important;
+    padding: 12px 18px !important;
+    color: #4a5568 !important;
+    margin: 20px 0 !important;
+}
+
+/* 6. 极简页脚 */
 #footer {
     background: transparent !important;
-    border-top: 1px solid var(--card-border) !important;
+    border-top: 1px solid var(--border-color) !important;
     color: var(--text-muted) !important;
+    text-align: center !important;
+    margin-top: 60px !important;
+    padding: 30px 0 !important;
+    font-size: 0.88rem !important;
+}
+
+#footer a {
+    color: var(--text-muted) !important;
+    text-decoration: none !important;
+}
+
+#footer a:hover {
+    color: var(--primary) !important;
+}
+
+#footer #footer-wrap {
+    color: var(--text-muted) !important;
+}
+
+/* 7. 右侧浮动工具栏极简化 */
+#rightside > div > button,
+#rightside > div > a {
+    background: var(--card-bg) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: 50% !important;
+}
+
+#rightside > div > button:hover,
+#rightside > div > a:hover {
+    background: var(--primary) !important;
+    color: #ffffff !important;
 }
